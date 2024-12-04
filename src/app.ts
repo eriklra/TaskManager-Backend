@@ -1,14 +1,16 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import { corsConfig } from './config/cors.config';
+import taskRoutes from './routes/task.routes';
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
+// Configuración de CORS
+app.use(corsConfig);
+
+// Middlewares
 app.use(express.json());
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('¡Servidor funcionando desde app.ts!');
-});
+// Rutas
+app.use('/api/tasks', taskRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+export default app;
