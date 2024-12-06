@@ -1,8 +1,35 @@
 
 import { Task } from '../models/task.model';
 
-
-const tasks: Task[] = []; // Simulando una base de datos
+const tasks: Task[] = [
+    {
+        id: 1,
+        title: 'Comprar groceries',
+        description: 'Comprar frutas, verduras y pan.',
+        completed: false,
+        created_at: new Date(),
+        updated_at: '',
+        show: true,
+    },
+    {
+        id: 2,
+        title: 'Llamar al médico',
+        description: 'Llamar al médico para pedir cita.',
+        completed: false,
+        created_at: new Date(),
+        updated_at: '',
+        show: true,
+    },
+    {
+        id: 3,
+        title: 'Terminar el proyecto',
+        description: 'Avanzar en el desarrollo del proyecto de software.',
+        completed: true,
+        created_at: new Date(),
+        updated_at: '',
+        show: true,
+    }
+];
 
 export const getTasks = (): Task[] => tasks.filter(task => task.show);
 
@@ -12,14 +39,18 @@ export const getTaskById = (id: number): Task | undefined => tasks.find(task => 
 // Crear una nueva tarea
 export const createTask = (task: Task): Task => {
     task.id = tasks.length + 1;
+    task.created_at = new Date();
+    task.updated_at = '';
+    task.show = true;
     tasks.push(task);
     return task;
 };
 
 export const updateTask = (id: number, updatedTask: Partial<Task>): Task | null => {
     const index = tasks.findIndex(task => task.id === id);
+    updatedTask.updated_at = new Date();
     if (index === -1) return null;
-    tasks[index] = { ...tasks[index], ...updatedTask };
+    tasks[index] = { ...tasks[index],  ...updatedTask };
     return tasks[index];
 };
 

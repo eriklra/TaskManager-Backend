@@ -6,9 +6,9 @@ export const getTasks = (): Task[] => {
   return taskRepository.getTasks();
 };
 
-export const getTasksById = (id: number): Task[] => {
+export const getTasksById = (id: number): Task | null => {
     const task = taskRepository.getTaskById(id);
-    return task ? [task] : [];
+    return task ? task : null;
 };
 
 // Crear una tarea

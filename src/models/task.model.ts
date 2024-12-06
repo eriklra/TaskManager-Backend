@@ -7,6 +7,6 @@ export interface Task {
     description?: string;
     completed: boolean;
     created_at?: Date;
-    updated_at?: Date;
+    updated_at?: Date | string;
     show?: boolean;
 }
